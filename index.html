@@ -1,1 +1,139 @@
-mm
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Modern Calculator</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+    }
+
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #e0eafc, #cfdef3);
+    }
+
+    .calculator {
+        width: 330px;
+        padding: 25px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .display {
+        width: 100%;
+        height: 70px;
+        border-radius: 16px;
+        border: none;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: inset 4px 4px 10px rgba(0,0,0,0.1),
+                    inset -4px -4px 10px rgba(255,255,255,0.7);
+        font-size: 26px;
+        padding: 15px;
+        text-align: right;
+        outline: none;
+        margin-bottom: 20px;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+    }
+
+    button {
+        height: 56px;
+        border: none;
+        border-radius: 16px;
+        font-size: 18px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 6px 6px 15px rgba(0,0,0,0.15),
+                    -6px -6px 15px rgba(255,255,255,0.9);
+        cursor: pointer;
+        transition: all 0.15s ease;
+    }
+
+    button:active {
+        transform: scale(0.95);
+        box-shadow: inset 4px 4px 10px rgba(0,0,0,0.15),
+                    inset -4px -4px 10px rgba(255,255,255,0.7);
+    }
+
+    .operator {
+        background: linear-gradient(135deg, #5f9cff, #3c7bff);
+        color: white;
+    }
+
+    .clear {
+        background: linear-gradient(135deg, #ff6b6b, #ff3b3b);
+        color: white;
+    }
+
+    .equal {
+        grid-column: span 2;
+        background: linear-gradient(135deg, #34c759, #28a745);
+        color: white;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="calculator">
+    <input type="text" id="display" class="display" readonly>
+
+    <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button onclick="appendValue('/')">÷</button>
+        <button onclick="appendValue('*')">×</button>
+        <button class="operator" onclick="appendValue('-')">−</button>
+
+        <button onclick="appendValue('7')">7</button>
+        <button onclick="appendValue('8')">8</button>
+        <button onclick="appendValue('9')">9</button>
+        <button class="operator" onclick="appendValue('+')">+</button>
+
+        <button onclick="appendValue('4')">4</button>
+        <button onclick="appendValue('5')">5</button>
+        <button onclick="appendValue('6')">6</button>
+        <button onclick="appendValue('.')">.</button>
+
+        <button onclick="appendValue('1')">1</button>
+        <button onclick="appendValue('2')">2</button>
+        <button onclick="appendValue('3')">3</button>
+
+        <button onclick="appendValue('0')">0</button>
+        <button class="equal" onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById("display");
+
+    function appendValue(value) {
+        display.value += value;
+    }
+
+    function clearDisplay() {
+        display.value = "";
+    }
+
+    function calculate() {
+        try {
+            display.value = eval(display.value);
+        } catch {
+            display.value = "Error";
+        }
+    }
+</script>
+
+</body>
+</html>
